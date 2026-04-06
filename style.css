@@ -1,0 +1,477 @@
+/* ============================================================
+   SIGNIFYIN' — BLACK SOUND ACROSS CENTURIES
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #191816;
+  --text:        #f2f0e9;
+  --bar-h:       72px;
+  --card-size:   clamp(120px, 14vw, 200px);
+  --font-display:'Bebas Neue', sans-serif;
+  --font-mono:   'Space Mono', monospace;
+  --font-serif:  'IM Fell English', serif;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  overflow: hidden;
+}
+
+/* ============================================================
+   STAGE — clips the strip, intercepts wheel
+   ============================================================ */
+.stage {
+  position: fixed;
+  inset: 0;
+  top: 100px;
+  bottom: var(--bar-h);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================================
+   STRIP — the single horizontal row
+   ============================================================ */
+.strip {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  height: 100%;
+  will-change: transform;
+  transition: transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 60px;
+  cursor: grab;
+}
+
+.strip:active { cursor: grabbing; }
+
+/* ============================================================
+   ERA BLOCK
+   ============================================================ */
+.era {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 48px;
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+}
+
+/* Thin vertical divider between eras */
+.era + .era::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(242, 240, 233, 0.08);
+}
+
+.era-label {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 34px);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ============================================================
+   CARDS ROW
+   ============================================================ */
+.cards-row {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  align-items: center;
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.card {
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.card-img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: rgba(242,240,233,0.05);
+  overflow: hidden;
+}
+
+.card-img img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: unset;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+/* placeholder number when no image */
+.card-num {
+  position: absolute;
+  inset: 0;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: rgba(242,240,233,0.15);
+  pointer-events: none;
+}
+
+/* hide num when image loaded */
+.card-img img[src]:not([src=""]) ~ .card-num { opacity: 0; }
+
+/* HOVER state */
+.card:hover .card-img img { transform: scale(1.04); }
+
+.card:hover .card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  opacity: 0.45;
+  mix-blend-mode: color;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* playing ring */
+.card.playing .card-img {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* CAPTION — hidden until hover */
+.card-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(25,24,22,0.95) 0%, transparent 100%);
+  padding: 24px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.card:hover .card-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cap-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cap-artist {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(242,240,233,0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+   BOTTOM BAR
+   ============================================================ */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--bar-h);
+  background: rgba(15, 14, 13, 0.97);
+  border-top: 1px solid rgba(242,240,233,0.07);
+  display: flex;
+  align-items: center;
+  z-index: 200;
+  backdrop-filter: blur(12px);
+}
+
+/* LEFT 25% — jump nav */
+.jump-nav {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px;
+  border-right: 1px solid rgba(242,240,233,0.07);
+  flex-shrink: 0;
+}
+
+.jump-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(242,240,233,0.2);
+  background: transparent;
+  color: rgba(242,240,233,0.4);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.jump-btn:hover {
+  border-color: var(--section-accent);
+  color: var(--section-accent);
+}
+
+.jump-btn.active {
+  background: var(--section-accent);
+  color: var(--bg);
+  border-color: var(--section-accent);
+}
+
+.jump-label { pointer-events: none; }
+
+/* RIGHT 75% — player */
+.player {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 24px;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.player-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.07em;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-artist {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(242,240,233,0.4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.ctrl-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: rgba(242,240,233,0.5);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+.ctrl-btn:hover { color: var(--text); }
+.ctrl-btn svg { width: 18px; height: 18px; }
+
+.skip-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -34%);
+  pointer-events: none;
+  color: inherit;
+}
+
+.play-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--text);
+  color: var(--bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.play-btn:hover { transform: scale(1.08); }
+.play-btn svg { width: 14px; height: 14px; }
+.icon-pause.hidden, .icon-play.hidden { display: none; }
+
+.player-progress {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.time-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(242,240,233,0.35);
+  flex-shrink: 0;
+}
+
+.progress-track {
+  flex: 1;
+  height: 2px;
+  background: rgba(242,240,233,0.1);
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--text);
+  width: 0%;
+  transition: width 0.2s linear;
+  pointer-events: none;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 18px 60px;
+  pointer-events: none;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 100px);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+@media (max-width: 768px) {
+  html, body { overflow: auto; }
+
+  .stage {
+    position: static;
+    overflow: visible;
+    height: auto;
+    display: block;
+    padding-bottom: calc(var(--bar-h) + 16px);
+  }
+
+  .strip {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    transform: none !important;
+    transition: none;
+    padding: 32px 20px;
+    gap: 40px;
+    cursor: default;
+  }
+
+  .era {
+    padding: 0;
+    height: auto;
+    gap: 16px;
+  }
+
+  .era + .era::before { display: none; }
+
+  .era-label { font-size: 28px; }
+
+  .cards-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .card { width: 100%; }
+
+  /* always show captions on mobile (no hover) */
+  .card-caption {
+    opacity: 1;
+    transform: none;
+    position: static;
+    background: none;
+    padding: 6px 0 0;
+  }
+
+  .cap-title, .cap-artist { white-space: normal; }
+
+  .bottom-bar { gap: 0; }
+
+  .jump-nav {
+    width: 25%;
+    gap: 5px;
+    padding: 0 8px;
+  }
+
+  .jump-btn { width: 24px; height: 24px; font-size: 7px; }
+
+  .player { padding: 0 10px; gap: 8px; }
+
+  .player-info { width: 90px; }
+  .player-title { font-size: 13px; }
+
+  .player-progress { gap: 6px; }
+  .time-label { font-size: 9px; }
+}
+
+@media (max-width: 400px) {
+  .jump-nav { width: 28%; }
+  .player-info { display: none; }
+}

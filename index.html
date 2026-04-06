@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signifyin'</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+
+<header class="site-header">
+  <h1 class="site-title">Signifyin'</h1>
+</header>
+
+  <!-- BOTTOM BAR -->
+  <div class="bottom-bar">
+
+    <!-- LEFT 25%: section jump -->
+    <div class="jump-nav">
+      <button class="jump-btn active" data-index="0" style="--section-accent:#2e3f66" title="Western African Oral">
+        <span class="jump-label">WA</span>
+      </button>
+      <button class="jump-btn" data-index="1" style="--section-accent:#5d6e5d" title="Slave Songs">
+        <span class="jump-label">SS</span>
+      </button>
+      <button class="jump-btn" data-index="2" style="--section-accent:#d4ac4e" title="Black Preaching">
+        <span class="jump-label">BP</span>
+      </button>
+      <button class="jump-btn" data-index="3" style="--section-accent:#816a8a" title="Harlem Renaissance">
+        <span class="jump-label">HR</span>
+      </button>
+      <button class="jump-btn" data-index="4" style="--section-accent:#c24a2d" title="Black Arts Movement">
+        <span class="jump-label">BAM</span>
+      </button>
+      <button class="jump-btn" data-index="5" style="--section-accent:#707a2a" title="Hip-Hop">
+        <span class="jump-label">HH</span>
+      </button>
+    </div>
+
+    <!-- RIGHT 75%: playback -->
+    <div class="player">
+      <div class="player-info">
+        <span class="player-title" id="playerTitle">—</span>
+        <span class="player-artist" id="playerArtist">Select a track to begin</span>
+      </div>
+      <div class="player-center">
+        <button class="ctrl-btn" id="skipBack">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.55"/>
+          </svg>
+          <span class="skip-label">15</span>
+        </button>
+        <button class="play-btn" id="playPause">
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          <svg class="icon-pause hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <button class="ctrl-btn" id="skipFwd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.55"/>
+          </svg>
+          <span class="skip-label">15</span>
+        </button>
+      </div>
+      <div class="player-progress">
+        <span class="time-label" id="currentTime">0:00</span>
+        <div class="progress-track" id="progressTrack">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="time-label" id="totalTime">0:00</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAIN STAGE -->
+  <div class="stage" id="stage">
+    <div class="strip" id="strip">
+
+      <!-- ── SECTION: WESTERN AFRICAN ORAL ── -->
+      <div class="era" data-index="0" id="era-0" style="--accent:#2e3f66">
+        <div class="era-label">Western African Oral</div>
+        <div class="cards-row">
+          <div class="card" data-audio="assets/audio/wa-01.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/wa-01.jpg" alt="" /><div class="card-num">01</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/wa-02.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/wa-02.jpg" alt="" /><div class="card-num">02</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/wa-03.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/wa-03.jpg" alt="" /><div class="card-num">03</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/wa-04.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/wa-04.jpg" alt="" /><div class="card-num">04</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/wa-05.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/wa-05.jpg" alt="" /><div class="card-num">05</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: SLAVE SONGS ── -->
+      <div class="era" data-index="1" id="era-1" style="--accent:#5d6e5d">
+        <div class="era-label">Slave Songs</div>
+        <div class="cards-row">
+          <div class="card" data-audio="assets/audio/ss-01.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/ss-01.jpg" alt="" /><div class="card-num">01</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/ss-02.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/ss-02.jpg" alt="" /><div class="card-num">02</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/ss-03.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/ss-03.jpg" alt="" /><div class="card-num">03</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/ss-04.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/ss-04.jpg" alt="" /><div class="card-num">04</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/ss-05.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/ss-05.jpg" alt="" /><div class="card-num">05</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: BLACK PREACHING ── -->
+      <div class="era" data-index="2" id="era-2" style="--accent:#d4ac4e">
+        <div class="era-label">Black Preaching</div>
+        <div class="cards-row">
+          <div class="card" data-audio="assets/audio/bp-01.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bp-01.jpg" alt="" /><div class="card-num">01</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bp-02.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bp-02.jpg" alt="" /><div class="card-num">02</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bp-03.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bp-03.jpg" alt="" /><div class="card-num">03</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bp-04.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bp-04.jpg" alt="" /><div class="card-num">04</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bp-05.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bp-05.jpg" alt="" /><div class="card-num">05</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: HARLEM RENAISSANCE ── -->
+      <div class="era" data-index="3" id="era-3" style="--accent:#816a8a">
+        <div class="era-label">Harlem Renaissance</div>
+        <div class="cards-row">
+          <div class="card" data-audio="assets/audio/hr-01.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hr-01.jpg" alt="" /><div class="card-num">01</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hr-02.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hr-02.jpg" alt="" /><div class="card-num">02</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hr-03.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hr-03.jpg" alt="" /><div class="card-num">03</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hr-04.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hr-04.jpg" alt="" /><div class="card-num">04</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hr-05.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hr-05.jpg" alt="" /><div class="card-num">05</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: BLACK ARTS MOVEMENT ── -->
+      <div class="era" data-index="4" id="era-4" style="--accent:#c24a2d">
+        <div class="era-label">Black Arts Movement</div>
+        <div class="cards-row">
+          <div class="card" data-audio="assets/audio/bam-01.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bam-01.jpg" alt="" /><div class="card-num">01</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bam-02.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bam-02.jpg" alt="" /><div class="card-num">02</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bam-03.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bam-03.jpg" alt="" /><div class="card-num">03</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bam-04.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bam-04.jpg" alt="" /><div class="card-num">04</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/bam-05.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/bam-05.jpg" alt="" /><div class="card-num">05</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: HIP-HOP ── -->
+      <div class="era" data-index="5" id="era-5" style="--accent:#707a2a">
+        <div class="era-label">Hip-Hop</div>
+        <div class="cards-row">
+          <div class="card" data-audio="assets/audio/hh-01.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hh-01.jpg" alt="" /><div class="card-num">01</div></div>
+            <div class="card-caption"><span class="cap-title">The Blacker The Berry</span><span class="cap-artist">Kendrick Lamar</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hh-02.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hh-02.jpg" alt="" /><div class="card-num">02</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hh-03.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hh-03.jpg" alt="" /><div class="card-num">03</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hh-04.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hh-04.jpg" alt="" /><div class="card-num">04</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+          <div class="card" data-audio="assets/audio/hh-05.mp3" data-title="Edit Title" data-artist="Edit Artist">
+            <div class="card-img"><img src="assets/images/hh-05.jpg" alt="" /><div class="card-num">05</div></div>
+            <div class="card-caption"><span class="cap-title">Edit Title</span><span class="cap-artist">Edit Artist</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end strip -->
+  </div><!-- end stage -->
+
+  <audio id="audioEl"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
