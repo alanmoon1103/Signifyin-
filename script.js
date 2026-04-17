@@ -62,7 +62,7 @@ function scrollTo(x) {
 stage.addEventListener('wheel', (e) => {
   if (isMobile()) return;
   e.preventDefault();
-  scrollTo(targetX + e.deltaY * 1);
+  scrollTo(targetX + e.deltaY * 0.5);
   updateActiveJump();
 }, { passive: false });
 
@@ -70,7 +70,7 @@ stage.addEventListener('wheel', (e) => {
 window.addEventListener('wheel', (e) => {
   if (isMobile()) return;
   e.preventDefault();
-  scrollTo(targetX + e.deltaY * 1);
+  scrollTo(targetX + e.deltaY * 0.5);
   updateActiveJump();
 }, { passive: false });
 
@@ -252,3 +252,30 @@ window.addEventListener('resize', () => {
 
 // init
 setActiveJump(0);
+
+// ============================================================
+// INTRO FADE
+// ============================================================
+const introText = document.querySelector('.intro-text');
+const scrollHint = document.querySelector('.scroll-hint');
+let introGone = false;
+
+window.addEventListener('wheel', () => {
+  const fadeStart = 0;
+  const fadeEnd = 75;
+  const opacity = 1 - Math.min(1, Math.max(0, (targetX - fadeStart) / fadeEnd));
+  introText.style.opacity = opacity;
+  scrollHint.style.opacity = opacity;
+});
+
+const aboutBtn = document.getElementById('aboutBtn');
+
+aboutBtn.addEventListener('click', () => {
+  if (introGone) {
+    introText.classList.remove('hidden');
+    scrollHint.classList.remove('hidden');
+    introGone = false;
+  }
+});
+
+
